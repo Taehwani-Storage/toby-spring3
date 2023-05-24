@@ -69,4 +69,3 @@ public class UserDao {
         System.out.println(selectedUser.getPassword());
     }
 }
-
