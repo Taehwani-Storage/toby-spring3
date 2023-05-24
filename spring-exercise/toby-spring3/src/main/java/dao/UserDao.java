@@ -5,9 +5,12 @@ import domain.User;
 import java.sql.*;
 
 
-public abstract class UserDao {
+public class UserDao {
+    ConnectionMaker connectionMaker;
 
-    SimpleConnectionMaker connectionMaker = new SimpleConnectionMaker();
+    public UserDao(ConnectionMaker connectionMaker) {
+        this.connectionMaker = new DConnectionMaker();
+    }
 
     public void add(User user) throws ClassNotFoundException, SQLException {
 
@@ -44,14 +47,11 @@ public abstract class UserDao {
     }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        UserDao userDao = new UserDao() {
-            @Override
-            public Connection getConnection() throws ClassNotFoundException, SQLException {
-                return null;
-            }
-        };
+        ConnectionMaker cm = new DConnectionMaker();
+        UserDao userDao = new UserDao(cm);
+
         User user = new User();
-        user.setId("4");
+        user.setId("8");
         user.setName("kyeongrok");
         user.setPassword("1234");
         userDao.add(user);
@@ -61,6 +61,4 @@ public abstract class UserDao {
         System.out.println(selectedUser.getName());
         System.out.println(selectedUser.getPassword());
     }
-
-    public abstract Connection getConnection() throws ClassNotFoundException, SQLException;
 }
