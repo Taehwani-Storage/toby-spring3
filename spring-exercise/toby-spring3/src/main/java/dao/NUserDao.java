@@ -24,7 +24,5 @@ public class NUserDao extends UserDao {
             return conn;
         }
 
-    private Map<String, String> getenv() {
-        return null;
     }
 }
